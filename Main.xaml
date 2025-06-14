@@ -27,6 +27,7 @@
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -67,15 +68,60 @@
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1106,549.04" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1100,1344" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="userType" />
+      <Variable x:TypeArguments="x:Int32" Name="userArea" />
+      <Variable x:TypeArguments="x:String" Name="userAreaStr" />
+      <Variable x:TypeArguments="x:String" Name="userBudgetStr" />
+      <Variable x:TypeArguments="x:Double" Name="userBudget" />
+      <Variable x:TypeArguments="x:String" Name="userRegion" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,118" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Test&quot;]" />
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,109" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;EEE&quot;]" />
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="434,275" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="원하는 지역을 입력해주세요 (예: 강남구)" Title="지역입력">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[userRegion]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="434,275" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="예산을 입력하세요 (억 단위, 예: 2)" Title="예산 입력">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[userBudgetStr]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
+    <Assign sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Double">[userBudget]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Double">[CDbl(userBudget)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="434,275" sap2010:WorkflowViewState.IdRef="InputDialog_4" IsPassword="False" Label="희망하는 평수를 입력하세요 (예: 20)" Title="면적 입력">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[userAreaStr]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
+    <Assign sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[userArea]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[CInt(userAreaStr)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="434,266" sap2010:WorkflowViewState.IdRef="InputDialog_5" IsPassword="False" Label="희망하는 매물 유형을 입력하세요 (예: 오피스텔, 아파트, 원룸 등)" Title="매물 유형 입력">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[userType]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
   </Sequence>
 </Activity>
