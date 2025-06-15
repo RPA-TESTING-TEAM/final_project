@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uibi="http://schemas.uipath.com/workflow/infrastructure/baf/uibi" xmlns:uiisi="http://schemas.uipath.com/workflow/infrastructure/is/uiisi" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uoia="clr-namespace:UiPath.OpenAI.IntegrationService.Activities;assembly=UiPath.OpenAI.IntegrationService.Activities" xmlns:uoic="clr-namespace:UiPath.OpenAI.IntegrationService.Client;assembly=UiPath.OpenAI.IntegrationService" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -46,6 +46,15 @@
       <x:String>UiPath.IntegrationService.Activities.Runtime.Helpers.TypeDetailsCustomization</x:String>
       <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
       <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.BAF.Infrastructure.Entity</x:String>
+      <x:String>UiPath.BAF.Infrastructure.Enums</x:String>
+      <x:String>UiPath.BAF.Infrastructure.Telemetry</x:String>
+      <x:String>UiPath.BAF.Infrastructure</x:String>
+      <x:String>UiPath.BAF.Infrastructure.Connection</x:String>
+      <x:String>UiPath.OpenAI.IntegrationService.Activities</x:String>
+      <x:String>UiPath.IntegrationCore.Activities</x:String>
+      <x:String>UiPath.BAF.Activities</x:String>
+      <x:String>UiPath.BAF.Infrastructure.Contracts</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -98,10 +107,17 @@
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
       <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>UiPath.BAF.Infrastructure</AssemblyReference>
+      <AssemblyReference>UiPath.OpenAI.IntegrationService.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1158,590.04" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="942,843.5" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="AnswerData" />
       <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -109,7 +125,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Google 인기 검색어" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="484,486" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="DebuggerApi" ScopeGuid="d17f6ca7-83dc-43d3-aba2-b5740a0b7945" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Google 인기 검색어" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="484,495" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="DebuggerApi" ScopeGuid="d17f6ca7-83dc-43d3-aba2-b5740a0b7945" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -133,5 +149,248 @@
         <uix:TargetApp Area="-13, -13, 3866, 1964" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAFuSURBVDhPY2AYckB7VSibyapQddNlgR4M/xkY0eVxgtBVocwmK4JPm6wI/mOyIvg/COstChRDV4cXOC72U/dZ7fUJZoDpsmBtdDV4we89LJUfd3P8L1lv+Q9syPIQB3Q1DLeMVDVv6KtOv2mgMuWOpbYKTPz3Xha733tYfv/ew/L/516WeuOVQTUmK4OsUTTfNFbTuGmg+uGmger/e2Za/5/Y6H9+7WwS8X8bg+jvbcxPfu9k/v97D8u+/6sYmFE0gkBS0lzeBv+GI5nB/b83OgS8eWyj//+lk8n/V86m/98lqzz8OoXn/5cOoYf/F3JKo+sFA/uG9/Ot617/t6h+/s+08nHQCwfT/FfOpn9BBoCxi+mf1+7Gjuj6wMCx9UuUU+uX/yDs2PqpDyb+0sXM/bWL2YlXzqY3XrmYhqHqggKH9u8KTq1fvoA0O7d+Pm488z8ruhq8wKnlkxXU9jdOLd/l0eWJAmBDyNU84AAAfvim6Q9uypoAAAAASUVORK5CYII=" InformativeScreenshot="e6a2254a48988b647d6af32d10114d77.jpg" Selector="&lt;html app='chrome.exe' title='Google 인기 검색어' /&gt;" Url="https://trends.google.co.kr/trending?geo=KR&amp;hl=ko" Version="V2" />
       </uix:NApplicationCard.TargetApp>
     </uix:NApplicationCard>
+    <uoia:GenerateChatCompletion sap2010:Annotation.AnnotationText="" BindingsVersion="2.1" BusinessEntityName="Generate Chat Completion" ConfiguredBusinessEntity="generateChatCompletion" ConnectionId="e6c1cdbe-84ea-4c89-b6ea-41fca560366a" Connector="uipath-openai-openai" CrudOperation="Create" DesignConnectionEnabled="True" DisplayName="Generate Chat Completion" sap:VirtualizedContainerService.HintSize="484,216.5" sap2010:WorkflowViewState.IdRef="GenerateChatCompletion_1" Language="ko">
+      <uoia:GenerateChatCompletion.BusinessEntity>
+        <uibi:BusinessEntity Metadata="{x:Reference __ReferenceID14}" Name="generateChatCompletion">
+          <uibi:BusinessEntity.AllFields>
+            <scg:List x:TypeArguments="uibi:EntityField" Capacity="15">
+              <uiisi:OperationEntityField x:TypeArguments="uoic:GenerateChatCompletion" ArgumentDirection="In" ArgumentType="uoic:GenerateChatCompletion" DataType="GenerateChatCompletion" Description="The request data in JSON format for the chat completion" DisplayName="Completion Request" FormDataType="ExpressionTextBox" IsChildEntityField="False" IsCustomField="False" IsDefault="False" IsDeletable="True" IsHidden="True" IsIdField="False" IsMandatory="True" IsSelected="False" Location="Undefined" Name="body" ShouldFilterOnChange="False" />
+              <x:Reference>__ReferenceID15</x:Reference>
+              <x:Reference>__ReferenceID16</x:Reference>
+              <x:Reference>__ReferenceID17</x:Reference>
+              <x:Reference>__ReferenceID18</x:Reference>
+              <x:Reference>__ReferenceID19</x:Reference>
+              <x:Reference>__ReferenceID20</x:Reference>
+              <x:Reference>__ReferenceID21</x:Reference>
+              <x:Reference>__ReferenceID22</x:Reference>
+              <x:Reference>__ReferenceID23</x:Reference>
+              <x:Reference>__ReferenceID24</x:Reference>
+              <x:Reference>__ReferenceID25</x:Reference>
+              <x:Reference>__ReferenceID26</x:Reference>
+              <x:Reference>__ReferenceID27</x:Reference>
+              <x:Reference>__ReferenceID28</x:Reference>
+            </scg:List>
+          </uibi:BusinessEntity.AllFields>
+          <uibi:BusinessEntity.EntityMetadata>
+            <uibi:EntityMetadata DisplayName="Generate Chat Completion" EligibleOperations="1" IsCustomEntity="False" Name="generateChatCompletion">
+              <uibi:EntityMetadata.Metadata>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object" x:Name="__ReferenceID14">
+                  <x:String x:Key="Object">generateChatCompletion</x:String>
+                  <x:String x:Key="Client">UiPath.OpenAI.IntegrationService.Client.GenerateChatCompletionAPIClient</x:String>
+                  <x:String x:Key="Operation">CreateGenerateChatCompletion</x:String>
+                  <x:String x:Key="Path">/generateChatCompletion</x:String>
+                </scg:Dictionary>
+              </uibi:EntityMetadata.Metadata>
+            </uibi:EntityMetadata>
+          </uibi:BusinessEntity.EntityMetadata>
+          <uibi:BusinessEntity.SelectedFields>
+            <scg:List x:TypeArguments="uibi:EntityField" Capacity="16">
+              <x:Reference>__ReferenceID16</x:Reference>
+              <x:Reference>__ReferenceID17</x:Reference>
+              <x:Reference>__ReferenceID18</x:Reference>
+              <x:Reference>__ReferenceID19</x:Reference>
+              <x:Reference>__ReferenceID20</x:Reference>
+              <x:Reference>__ReferenceID21</x:Reference>
+              <x:Reference>__ReferenceID22</x:Reference>
+              <x:Reference>__ReferenceID23</x:Reference>
+              <x:Reference>__ReferenceID24</x:Reference>
+              <x:Reference>__ReferenceID25</x:Reference>
+              <x:Reference>__ReferenceID26</x:Reference>
+              <x:Reference>__ReferenceID27</x:Reference>
+              <x:Reference>__ReferenceID28</x:Reference>
+              <x:Reference>__ReferenceID15</x:Reference>
+            </scg:List>
+          </uibi:BusinessEntity.SelectedFields>
+          <uibi:BusinessEntity.TelemetryProperties>
+            <scg:Dictionary x:TypeArguments="uibi:TelemetryGroup, scg:IDictionary(x:String, x:String)" />
+          </uibi:BusinessEntity.TelemetryProperties>
+        </uibi:BusinessEntity>
+      </uoia:GenerateChatCompletion.BusinessEntity>
+      <uoia:GenerateChatCompletion.DesignConnectionRequest>
+        <uiisi:ConnectionParameters AuthType="ElementInstance" ConnectionId="e6c1cdbe-84ea-4c89-b6ea-41fca560366a" ConnectionName="OpenAI #2" ConnectorKey="uipath-openai-openai">
+          <uiisi:ConnectionParameters.TelemetryInfo>
+            <uiisi:TelemetryInfo ActivityPack="UiPath.OpenAI.IntegrationService.Activities" ActivityPackVersion="5.0.1" Source="Windows" />
+          </uiisi:ConnectionParameters.TelemetryInfo>
+        </uiisi:ConnectionParameters>
+      </uoia:GenerateChatCompletion.DesignConnectionRequest>
+      <uoia:GenerateChatCompletion.SelectedFields>
+        <scg:List x:TypeArguments="uibi:EntityField" Capacity="14">
+          <uiisi:OperationEntityField x:TypeArguments="x:String" x:Name="__ReferenceID16" ArgumentDirection="In" ArgumentType="x:String" DataType="String" DefaultValue="Write an email to a new sales lead" Description="The prompt to use for the chat completion(s) generation" DisplayName="프롬프트" FormDataType="ExpressionTextBox" InArgumentValue="What is your name" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="True" IsSelected="False" Location="Undefined" Name="body.prompt" Order="1" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="x:String">What is your name</InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+            <uiisi:OperationEntityField.Value>
+              <Literal x:TypeArguments="x:String">What is your name</Literal>
+            </uiisi:OperationEntityField.Value>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="x:String" x:Name="__ReferenceID17" ArgumentDirection="In" ArgumentType="x:String" DataType="String" DefaultValue="You are a helpful assistant" Description="지침은 AI가 사용자의 의도와 일치하는 방식으로 응답하도록 안내합니다. 기본값은 null입니다." DisplayName="지침" FormDataType="ExpressionTextBox" InArgumentValue="You are a helpful assistant" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.instruction" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="x:String">You are a helpful assistant</InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+            <uiisi:OperationEntityField.Value>
+              <Literal x:TypeArguments="x:String">You are a helpful assistant</Literal>
+            </uiisi:OperationEntityField.Value>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="s:Nullable(x:Int32)" InArgumentValue="{x:Reference __ReferenceID0}" Value="{x:Reference __ReferenceID1}" x:Name="__ReferenceID18" ArgumentDirection="In" ArgumentType="s:Nullable(x:Int32)" DataType="Int32" DefaultValue="1920" Description="프롬프트 및 생성된 답변에 허용되는 최대 토큰 수입니다. 토큰이 적을수록 비용이 절감됩니다. 기본값은 3840입니다." DisplayName="최대 토큰" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.max_tokens" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="s:Nullable(x:Int32)" x:Name="__ReferenceID0">
+                <Literal x:TypeArguments="s:Nullable(x:Int32)" x:Name="__ReferenceID1" Value="1920" />
+              </InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="s:Nullable(x:Int32)" InArgumentValue="{x:Reference __ReferenceID2}" Value="{x:Reference __ReferenceID3}" x:Name="__ReferenceID19" ArgumentDirection="In" ArgumentType="s:Nullable(x:Int32)" DataType="Int32" DefaultValue="1" Description="1 이상의 숫자입니다.  AI가 반환할 자동 완성 선택 사항 수를 결정합니다. 기본값은 1입니다." DisplayName="N" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.n" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="s:Nullable(x:Int32)" x:Name="__ReferenceID2">
+                <Literal x:TypeArguments="s:Nullable(x:Int32)" x:Name="__ReferenceID3" Value="1" />
+              </InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="s:Nullable(x:Double)" InArgumentValue="{x:Reference __ReferenceID4}" Value="{x:Reference __ReferenceID5}" x:Name="__ReferenceID20" ArgumentDirection="In" ArgumentType="s:Nullable(x:Double)" DataType="Double" DefaultValue="1" Description="⌘ ⌥ K&#xA;0에서 2 사이의 숫자입니다. 0.8과 같이 값이 클수록 출력이 더 무작위적으로 생성되고 0.2와 같이 값이 작을수록 출력값이 응집됩니다. 기본값은 1입니다." DisplayName="온도" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.temperature" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID4">
+                <Literal x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID5" Value="1" />
+              </InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="s:Nullable(x:Double)" InArgumentValue="{x:Reference __ReferenceID6}" Value="{x:Reference __ReferenceID7}" x:Name="__ReferenceID21" ArgumentDirection="In" ArgumentType="s:Nullable(x:Double)" DataType="Double" DefaultValue="1" Description="0에서 1 사이의 숫자입니다.  숫자가 작을수록 더 적은 토큰이 고려됩니다. 기본값은 1입니다." DisplayName="상위 P" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.top_p" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID6">
+                <Literal x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID7" Value="1" />
+              </InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="s:Nullable(x:Boolean)" InArgumentValue="{x:Reference __ReferenceID8}" Value="{x:Reference __ReferenceID9}" x:Name="__ReferenceID22" ArgumentDirection="In" ArgumentType="s:Nullable(x:Boolean)" DataType="Boolean" DefaultValue="false" Description="부분 진행 상황을 다시 스트리밍할지 여부입니다. 설정된 경우 토큰을 사용할 수 있게 되면 데이터 전용 서버 전송 이벤트로 전송되며, 스트림은 data: [DONE] 메시지로 종료됩니다. 기본값은 False입니다." DisplayName="스트림" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.stream" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="s:Nullable(x:Boolean)" x:Name="__ReferenceID8">
+                <Literal x:TypeArguments="s:Nullable(x:Boolean)" x:Name="__ReferenceID9" Value="False" />
+              </InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="x:String" x:Name="__ReferenceID23" ArgumentDirection="In" ArgumentType="x:String" DataType="String" Description="API가 추가 토큰 생성을 중지하는 최대 4개의 시퀀스입니다. 반환된 텍스트에는 중지 시퀀스가 포함되지 않습니다. 기본값은 null입니다." DisplayName="중지" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.stop" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="s:Nullable(x:Double)" InArgumentValue="{x:Reference __ReferenceID10}" Value="{x:Reference __ReferenceID11}" x:Name="__ReferenceID24" ArgumentDirection="In" ArgumentType="s:Nullable(x:Double)" DataType="Double" DefaultValue="0" Description="-2.0에서 2.0 사이의 숫자입니다. 양수 값은 지금까지 텍스트에 나타났는지 여부에 따라 새 토큰에 페널티를 주어 모델이 새 주제에 관해 이야기할 가능성이 커집니다. 기본값은 0입니다." DisplayName="존재 페널티" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.presence_penalty" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID10">
+                <Literal x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID11" Value="0" />
+              </InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="s:Nullable(x:Double)" InArgumentValue="{x:Reference __ReferenceID12}" Value="{x:Reference __ReferenceID13}" x:Name="__ReferenceID25" ArgumentDirection="In" ArgumentType="s:Nullable(x:Double)" DataType="Double" DefaultValue="0" Description="-2.0에서 2.0 사이의 숫자입니다. 양수 값은 지금까지 텍스트의 기존 빈도를 기반으로 새 토큰에 페널티를 주어 모델이 동일한 줄을 그대로 반복할 가능성이 작아집니다. 기본값은 0입니다." DisplayName="빈도 페널티" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.frequency_penalty" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID12">
+                <Literal x:TypeArguments="s:Nullable(x:Double)" x:Name="__ReferenceID13" Value="0" />
+              </InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="x:String" x:Name="__ReferenceID26" ArgumentDirection="In" ArgumentType="x:String" DataType="String" Description="OpenAI가 오용을 모니터링하고 감지하는 데 도움이 되는 최종 사용자를 나타내는 고유 식별자입니다. 기본값은 null입니다." DisplayName="사용자" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.user" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="x:String" x:Name="__ReferenceID27" ArgumentDirection="In" ArgumentType="x:String" DataType="String" DefaultValue="gpt-3.5-turbo" Description="채팅 자동 완성에 사용할 대규모 언어 모델(LLM)입니다. 기본값은 gpt-4입니다." DisplayName="모델 이름" FormDataType="ExpressionTextBox" InArgumentValue="gpt-3.5-turbo" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="True" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="body.model" Order="3" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <InArgument x:TypeArguments="x:String">gpt-3.5-turbo</InArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.EnumValues>
+              <scg:List x:TypeArguments="x:String" Capacity="4">
+                <x:String>gpt-4</x:String>
+                <x:String>gpt-4-turbo</x:String>
+                <x:String>gpt-4o</x:String>
+                <x:String>gpt-3.5-turbo</x:String>
+              </scg:List>
+            </uiisi:OperationEntityField.EnumValues>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+            <uiisi:OperationEntityField.Value>
+              <Literal x:TypeArguments="x:String">gpt-3.5-turbo</Literal>
+            </uiisi:OperationEntityField.Value>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="x:String" x:Name="__ReferenceID28" ArgumentDirection="Out" ArgumentType="x:String" DataType="String" Description="AI가 생성한 상위 선택 텍스트" DisplayName="가장 많이 생성된 텍스트" FormDataType="ExpressionTextBox" IsChildEntityField="True" IsCustomField="False" IsDefault="False" IsDeletable="False" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="Response.text" OutArgumentValue="[AnswerData]" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.ArgumentValue>
+              <OutArgument x:TypeArguments="x:String">[AnswerData]</OutArgument>
+            </uiisi:OperationEntityField.ArgumentValue>
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <uiisi:CustomFieldsPriority x:Key="CustomFieldsPriority">Default</uiisi:CustomFieldsPriority>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+            <uiisi:OperationEntityField.Value>
+              <VisualBasicReference x:TypeArguments="x:String">[AnswerData]</VisualBasicReference>
+            </uiisi:OperationEntityField.Value>
+          </uiisi:OperationEntityField>
+          <uiisi:OperationEntityField x:TypeArguments="uoic:GenerateChatCompletion" x:Name="__ReferenceID15" ArgumentDirection="Out" ArgumentType="uoic:GenerateChatCompletion" DataType="GenerateChatCompletion" Description="Generate Chat Completion개 Object가 반환되었습니다." DisplayName="응답" FormDataType="ExpressionTextBox" IsChildEntityField="False" IsCustomField="False" IsDefault="False" IsDeletable="True" IsHidden="False" IsIdField="False" IsMandatory="False" IsSelected="False" Location="Undefined" Name="Response" ShouldFilterOnChange="False">
+            <uiisi:OperationEntityField.Metadata>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsPermanentlyHidden">False</x:Boolean>
+              </scg:Dictionary>
+            </uiisi:OperationEntityField.Metadata>
+          </uiisi:OperationEntityField>
+        </scg:List>
+      </uoia:GenerateChatCompletion.SelectedFields>
+      <uoia:GenerateChatCompletion.TelemetryProperties>
+        <scg:Dictionary x:TypeArguments="uibi:TelemetryGroup, scg:IDictionary(x:String, x:String)" />
+      </uoia:GenerateChatCompletion.TelemetryProperties>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uoia:GenerateChatCompletion>
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="484,109" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[AnswerData]" />
   </Sequence>
 </Activity>
